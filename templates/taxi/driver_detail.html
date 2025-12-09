@@ -10,26 +10,28 @@
   </p>
 
   <h3>Assigned Cars</h3>
-  {% if driver.cars.all %}
-    <table>
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Model</th>
-        <th>Manufacturer</th>
-      </tr>
-      </thead>
-      <tbody>
-      {% for car in driver.cars.all %}
+  {% with cars=driver.cars.all %}
+    {% if cars %}
+      <table>
+        <thead>
         <tr>
-          <td>{{ car.id }}</td>
-          <td>{{ car.model }}</td>
-          <td>{{ car.manufacturer.name }}</td>
+          <th>ID</th>
+          <th>Model</th>
+          <th>Manufacturer</th>
         </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>No cars assigned to this driver.</p>
-  {% endif %}
+        </thead>
+        <tbody>
+        {% for car in cars %}
+          <tr>
+            <td>{{ car.id }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.manufacturer.name }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No cars assigned to this driver.</p>
+    {% endif %}
+  {% endwith %}
 {% endblock %}

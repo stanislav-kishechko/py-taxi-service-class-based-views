@@ -10,13 +10,15 @@
   </p>
 
   <h3>Drivers</h3>
-  {% if car.drivers.all %}
-    <ul>
-      {% for driver in car.drivers.all %}
-        <li>{{ driver.username }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No drivers assigned to this car.</p>
-  {% endif %}
+  {% with drivers=car.drivers.all %}
+    {% if drivers %}
+      <ul>
+        {% for driver in drivers %}
+          <li>{{ driver.username }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No drivers assigned to this car.</p>
+    {% endif %}
+  {% endwith %}
 {% endblock %}
